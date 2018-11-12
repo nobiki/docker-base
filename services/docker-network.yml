@@ -1,0 +1,9 @@
+version: '2'
+
+networks:
+  base-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        -  subnet: 172.56.0.0/16

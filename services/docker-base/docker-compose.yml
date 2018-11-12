@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+
+  base-container:
+    container_name: base-container
+    hostname: base-container
+    image: base-container
+    build: ${PWD}/.
+    networks:
+      base-net:
+        ipv4_address: 172.56.0.2
+    environment:
+      - "TZ=Asia/Tokyo"
+    env_file:
+      - ${PWD}/.env.example
+    volumes:
+      - ${PWD}/bootstrap.sh:/bootstrap.sh
+    volumes_from:
+      - base-volume
+    command: /bootstrap.sh
+    tty: true
+
+  base-volume:
+    container_name: base-volume
+    hostname: base-volume
+    image: busybox
+    volumes:
+      - ${PWD}/apps:/apps
+
