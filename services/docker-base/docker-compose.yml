@@ -1,4 +1,4 @@
-version: '2'
+version: '2.3'
 
 services:
 
@@ -6,7 +6,9 @@ services:
     container_name: base-container
     hostname: base-container
     image: base-container
-    build: ${PWD}/.
+    build:
+      context: ${PWD}/.
+      target: release
     networks:
       base-net:
         ipv4_address: 172.56.0.2
