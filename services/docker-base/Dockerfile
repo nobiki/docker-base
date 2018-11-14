@@ -9,11 +9,10 @@ ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
 FROM golang:1.11.1-stretch as build
 WORKDIR /apps
 COPY ./apps /apps
-ADD . /apps
 RUN go build -o hello hello.go
 
 
-FROM busybox as release
+FROM busybox:1.29.3 as release
 WORKDIR /apps
 COPY --from=build /apps/hello /usr/local/bin/hello
 ENTRYPOINT ["/usr/local/bin/hello"]
