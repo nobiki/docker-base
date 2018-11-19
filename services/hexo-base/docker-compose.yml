@@ -1,0 +1,27 @@
+version: '2.3'
+
+services:
+
+  # hexo-web:
+  #   container_name: hexo-web
+  #   hostname: hexo-web
+  #   image: nginx:stable-alpine
+  #   networks:
+  #     base-net:
+  #       ipv4_address: 172.56.0.22
+  #   volumes:
+  #     - ${PWD}/nginx.conf:/etc/nginx/conf.d/default.conf
+  #     - ${PWD}/web:/web
+  #   depends_on:
+  #     - hexo-node
+  #
+  hexo-node:
+    container_name: hexo-node
+    hostname: hexo-node
+    image: hexo-node
+    build:
+      context: ${PWD}/.
+      target: writing
+    volumes:
+      - ${PWD}/web:/web
+
