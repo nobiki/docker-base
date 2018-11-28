@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "hexo-cli": "^1.0.4",
-    "hexo-generator-feed": "^1.2.2"
-  }
-}
