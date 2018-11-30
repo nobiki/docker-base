@@ -11,7 +11,8 @@ services:
         ipv4_address: 172.56.0.12
     volumes:
       - ${PWD}/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ${PWD}/web:/web
+    volumes_from:
+      - laravel-contents
     depends_on:
       - laravel-php
       - laravel-composer
@@ -24,15 +25,15 @@ services:
     networks:
       base-net:
         ipv4_address: 172.56.0.13
-    volumes:
-      - ${PWD}/web:/web
+    volumes_from:
+      - laravel-contents
 
   laravel-composer:
     container_name: laravel-composer
     hostname: laravel-composer
     image: composer:1.7.3
     volumes:
-      - ${PWD}/web:/app
+        - ${PWD}/web:/app
     depends_on:
       - laravel-php
 
@@ -40,6 +41,13 @@ services:
     container_name: laravel-node
     hostname: laravel-node
     image: node:10.13-alpine
+    volumes_from:
+      - laravel-contents
+
+  laravel-contents:
+    container_name: laravel-contents
+    hostname: laravel-contents
+    image: busybox
     volumes:
-      - ${PWD}/web:/web
+        - ${PWD}/web:/web
 
