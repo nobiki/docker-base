@@ -7,4 +7,3 @@ ENTRYPOINT ["sh","/bootstrap.sh"]
 
 FROM nginx:stable-alpine as release
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY web /web

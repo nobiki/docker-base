@@ -8,11 +8,20 @@ services:
     image: hexo-base
     build:
       context: ${PWD}/.
-      target: development
-      # target: release
+      # target: development
+      target: release
     networks:
       base-net:
         ipv4_address: 172.56.0.22
     volumes:
       - ${PWD}/bootstrap.sh:/bootstrap.sh
-      - ${PWD}/web:/web
+    volumes_from:
+      - hexo-contents
+
+  hexo-contents:
+    container_name: hexo-contents
+    hostname: hexo-contents
+    image: busybox
+    volumes:
+        - ${PWD}/web:/web
+

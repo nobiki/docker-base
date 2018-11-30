@@ -1,12 +1,8 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
-generate: ## hexo generate
-	docker exec hexo-base hexo generate --cwd /web/site/
-
-regenerate: ## hexo clean & hexo generate
-	docker exec hexo-base hexo clean --cwd /web/site/
-	docker exec hexo-base hexo generate --cwd /web/site/
+html: ## container-restart
+	make container-restart
 
 container: ## compose up
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml up -d
