@@ -1,3 +1,3 @@
 CREATE USER 'rails'@'%' IDENTIFIED BY 'rails';
-GRANT ALL PRIVILEGES ON *.* TO '9zilla'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'rails'@'%';
 FLUSH PRIVILEGES;
