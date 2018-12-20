@@ -1,0 +1,48 @@
+version: '2.3'
+
+services:
+
+  rails-web:
+    container_name: rails-web
+    hostname: rails-web
+    image: rails-web
+    build:
+      context: ${PWD}/.
+      # target: builder
+      # target: release
+    networks:
+      base-net:
+        ipv4_address: 172.56.0.32
+    user: "rails"
+    command: /bootstrap.sh
+    # command: /bin/bash
+    volumes:
+      - ${PWD}/bootstrap.sh:/bootstrap.sh
+    volumes_from:
+      - rails-contents
+    tty: true
+
+  rails-db:
+    container_name: rails-db
+    hostname: rails-db
+    image: mysql:5.7
+    networks:
+      base-net:
+        ipv4_address: 172.56.0.33
+    environment:
+      - "TZ=Asia/Tokyo"
+      - "MYSQL_ROOT_PASSWORD=root"
+    command: bash -c 'usermod -o -u 1000 mysql; groupmod -o -g 500 mysql; chown -R mysql:root /var/run/mysqld/; /entrypoint.sh mysqld --user=mysql --console'
+    volumes_from:
+      - rails-contents
+
+  rails-contents:
+    container_name: rails-contents
+    hostname: rails-contents
+    image: busybox
+    volumes:
+      - ${PWD}/web:/web
+      - ${PWD}/db/var/lib/mysql:/var/lib/mysql
+      - ${PWD}/db/etc/mysql/conf.d/:/etc/mysql/conf.d/
+      - ${PWD}/db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+

@@ -1,0 +1,27 @@
+.DEFAULT_GOAL := help
+.PHONY: help
+
+container: ## compose up
+	docker-compose -f ../docker-network.yml -f ./docker-compose.yml up -d
+
+container-destroy: ## compose stop -> rm
+	docker-compose -f ../docker-network.yml -f ./docker-compose.yml stop
+	docker-compose -f ../docker-network.yml -f ./docker-compose.yml rm -f
+
+container-rerun: ## compose stop -> rm -> up
+	make container-destroy
+	make container
+
+container-rebuild: ## compose stop -> rm -> rmi -> up
+	make container-destroy
+	docker rmi rails-web
+	make container
+
+container-restart: ## compose restart
+	docker-compose -f ../docker-network.yml -f ./docker-compose.yml restart
+
+tty: ## docker exec -it
+	docker exec -it -w /web rails-web bash
+
+help: # [Makefileを自己文書化する](https://postd.cc/auto-documented-makefile/)
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
