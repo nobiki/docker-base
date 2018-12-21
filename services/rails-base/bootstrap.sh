@@ -9,15 +9,30 @@ if [ ! -e /bootstrap.lock ]; then
     sudo chown 1000:1000 /web
 
     # Install Rails app with Webpacker
-    rails new /web/ --webpack --skip-bundle
+    rails new /web/ --webpack=vue --skip-bundle
     echo "gem 'dotenv-rails'" >> Gemfile
     #echo "gem 'webpacker', github: 'rails/webpacker'" >> Gemfile
 
     bundle install --jobs=4 --path vendor/bundle/
 
-    # Install Webpacker
     if [ ! -e /web/bin/webpack ]; then
+      # Install Webpacker
       rails webpacker:install
+
+      # Install Vue
+      rails webpacker:install:vue
+      tee -a /web/config/initializers/content_security_policy.rb << 'EOF'
+Rails.application.config.content_security_policy do |policy|
+  if Rails.env.development?
+    policy.script_src :self, :https, :unsafe_eval
+  else
+    policy.script_src :self, :https
+  end
+end
+EOF
+      # Hello Vue
+      rails g controller Top index
+      echo "<%= javascript_pack_tag 'hello_vue' %>" >> app/views/top/index.html.erb
 
       # Hot Module Reload Enable
       sed -ri "s/hmr: false/hmr: true/" config/webpacker.yml
