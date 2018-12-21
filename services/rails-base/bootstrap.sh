@@ -30,6 +30,10 @@ Rails.application.config.content_security_policy do |policy|
   end
 end
 EOF
+      # Generate .env file
+      echo "FOO=bar" >> .env
+      echo ".env" >> web/.gitignore
+
       # Hello Vue
       rails g controller Top index
       echo "<%= javascript_pack_tag 'hello_vue' %>" >> app/views/top/index.html.erb
