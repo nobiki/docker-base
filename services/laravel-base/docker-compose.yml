@@ -22,6 +22,7 @@ services:
     container_name: laravel-php
     hostname: laravel-php
     image: php:7.2.12-fpm-alpine
+    user: "1000:1000"
     networks:
       base-net:
         ipv4_address: 172.56.0.13
@@ -32,6 +33,7 @@ services:
     container_name: laravel-composer
     hostname: laravel-composer
     image: composer:1.7.3
+    user: "1000:1000"
     volumes:
         - ${PWD}/web:/app
     depends_on:
@@ -41,6 +43,7 @@ services:
     container_name: laravel-node
     hostname: laravel-node
     image: node:10.13-alpine
+    user: "1000:1000"
     volumes_from:
       - laravel-contents
 

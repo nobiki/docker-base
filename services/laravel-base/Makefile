@@ -13,7 +13,6 @@ setup: ## application setup
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node yarn --cwd /web install
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-composer composer install
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml restart
-	sudo chown -R 1000:1000 web/
 
 assets: ## npm run dev
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node npm --prefix /web run dev
@@ -22,7 +21,10 @@ assets-watch: ## npm run watch
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node npm --prefix /web run watch
 
 key: ## artisan key:generate
-	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-php php /web/artisan key:generate
+	docker exec portfolio-php php /web/artisan key:generate
+
+migrate: ## artisan migrate
+	docker exec portfolio-php php /web/artisan migrate
 
 container: ## compose up
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml up -d
