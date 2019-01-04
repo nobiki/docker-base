@@ -21,10 +21,10 @@ assets-watch: ## npm run watch
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node npm --prefix /web run watch
 
 key: ## artisan key:generate
-	docker exec portfolio-php php /web/artisan key:generate
+	docker exec laravel-php php /web/artisan key:generate
 
 migrate: ## artisan migrate
-	docker exec portfolio-php php /web/artisan migrate
+	docker exec laravel-php php /web/artisan migrate
 
 container: ## compose up
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml up -d
