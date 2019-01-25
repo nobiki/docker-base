@@ -1,12 +1,14 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
-install: ## laravel install + application setup
+laravel-project: ## laravel install + application setup
+	make container
+	sudo chmod 777 web
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml up -d laravel-composer
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-composer composer create-project laravel/laravel /app v5.7.0
-	make setup
+	make laravel-setup
 
-setup: ## application setup
+laravel-setup: ## application setup
 	make container
 	sudo chmod -R 777 web/bootstrap/cache/
 	sudo chmod -R 777 web/storage/
@@ -14,14 +16,14 @@ setup: ## application setup
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-composer composer install
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml restart
 
+laravel-key: ## artisan key:generate
+	docker exec laravel-php php /web/artisan key:generate
+
 assets: ## npm run dev
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node npm --prefix /web run dev
 
 assets-watch: ## npm run watch
 	docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node npm --prefix /web run watch
-
-key: ## artisan key:generate
-	docker exec laravel-php php /web/artisan key:generate
 
 migrate: ## artisan migrate
 	docker exec laravel-php php /web/artisan migrate
