@@ -5,7 +5,7 @@ services:
   laravel-web:
     container_name: laravel-web
     hostname: laravel-web
-    image: nginx:stable-alpine
+    image: pagespeed/nginx-pagespeed:1.13.35.2
     networks:
       base-net:
         ipv4_address: 172.56.0.12
