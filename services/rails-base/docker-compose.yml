@@ -21,6 +21,7 @@ services:
     volumes_from:
       - rails-contents
     tty: true
+    init: true
 
   rails-db:
     container_name: rails-db
@@ -35,6 +36,7 @@ services:
     command: bash -c 'usermod -o -u 1000 mysql; groupmod -o -g 500 mysql; chown -R mysql:root /var/run/mysqld/; /entrypoint.sh mysqld --user=mysql --console'
     volumes_from:
       - rails-contents
+    init: true
 
   rails-contents:
     container_name: rails-contents

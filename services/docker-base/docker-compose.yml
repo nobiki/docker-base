@@ -22,6 +22,7 @@ services:
       - base-volume
     command: /bootstrap.sh
     tty: true
+    init: true
 
   base-volume:
     container_name: base-volume

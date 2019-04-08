@@ -17,6 +17,7 @@ services:
       - ${PWD}/bootstrap.sh:/bootstrap.sh
     volumes_from:
       - hexo-contents
+    init: true
 
   hexo-contents:
     container_name: hexo-contents

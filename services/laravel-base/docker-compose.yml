@@ -17,6 +17,7 @@ services:
       - laravel-php
       - laravel-composer
       - laravel-node
+    init: true
 
   laravel-php:
     container_name: laravel-php
@@ -28,6 +29,7 @@ services:
         ipv4_address: 172.56.0.13
     volumes_from:
       - laravel-contents
+    init: true
 
   laravel-composer:
     container_name: laravel-composer
@@ -38,6 +40,7 @@ services:
         - ${PWD}/web:/app
     depends_on:
       - laravel-php
+    init: true
 
   laravel-node:
     container_name: laravel-node
@@ -46,6 +49,7 @@ services:
     user: "1000:1000"
     volumes_from:
       - laravel-contents
+    init: true
 
   laravel-contents:
     container_name: laravel-contents
