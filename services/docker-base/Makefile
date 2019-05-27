@@ -1,12 +1,17 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
+PROJECT_NAME=docker-base
+
 container: ## コンテナのビルド/実行
-	docker-compose -f ../docker-network.yml -f docker-compose.yml up -d
+	# docker-compose -f ../docker-network.yml -f docker-compose.yml up -d
+	docker-compose -p ${PROJECT_NAME} up -d
 
 container-destroy: ## コンテナの破棄
-	docker-compose -f ../docker-network.yml -f docker-compose.yml stop
-	docker-compose -f ../docker-network.yml -f docker-compose.yml rm -f
+	# docker-compose -f ../docker-network.yml -f docker-compose.yml stop
+	# docker-compose -f ../docker-network.yml -f docker-compose.yml rm -f
+	docker-compose -p ${PROJECT_NAME} stop
+	docker-compose -p ${PROJECT_NAME} rm -f
 
 container-rebuild: ## コンテナの再作成＋イメージの再ビルド
 	make container-destroy

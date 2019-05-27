@@ -9,9 +9,9 @@ services:
     build:
       context: ${PWD}/.
       target: release
-    networks:
-      base-net:
-        ipv4_address: 172.56.0.2
+    # networks:
+    #   base-net:
+    #     ipv4_address: 172.56.0.2
     environment:
       - "TZ=Asia/Tokyo"
     env_file:

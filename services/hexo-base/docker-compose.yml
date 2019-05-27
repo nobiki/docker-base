@@ -10,9 +10,9 @@ services:
       context: ${PWD}/.
       # target: development
       target: release
-    networks:
-      base-net:
-        ipv4_address: 172.56.0.22
+    # networks:
+    #   base-net:
+    #     ipv4_address: 172.56.0.22
     volumes:
       - ${PWD}/bootstrap.sh:/bootstrap.sh
     volumes_from:

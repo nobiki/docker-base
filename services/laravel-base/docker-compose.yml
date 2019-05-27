@@ -6,9 +6,9 @@ services:
     container_name: laravel-web
     hostname: laravel-web
     image: pagespeed/nginx-pagespeed:1.13.35.2
-    networks:
-      base-net:
-        ipv4_address: 172.56.0.12
+    # networks:
+    #   base-net:
+    #     ipv4_address: 172.56.0.12
     volumes:
       - ${PWD}/nginx.conf:/etc/nginx/conf.d/default.conf
     volumes_from:
@@ -24,9 +24,9 @@ services:
     hostname: laravel-php
     image: php:7.2.12-fpm-alpine
     user: "1000:1000"
-    networks:
-      base-net:
-        ipv4_address: 172.56.0.13
+    # networks:
+    #   base-net:
+    #     ipv4_address: 172.56.0.13
     volumes_from:
       - laravel-contents
     init: true
