@@ -27,12 +27,12 @@ laravel-key: ## artisan key:generate
 	docker exec laravel-php php /web/artisan key:generate
 
 assets: ## yarn run dev
-	# docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node yarn --prefix /web run dev
-	docker-compose -p ${PROJECT_NAME} run --rm laravel-node yarn --prefix /web run dev
+	# docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node yarn --cwd /web run dev
+	docker-compose -p ${PROJECT_NAME} run --rm laravel-node yarn --cwd /web run dev
 
 assets-watch: ## yarn run watch
-	# docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node yarn --prefix /web run watch
-	docker-compose -p ${PROJECT_NAME} run --rm laravel-node yarn --prefix /web run watch
+	# docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-node yarn --cwd /web run watch
+	docker-compose -p ${PROJECT_NAME} run --rm laravel-node yarn --cwd /web run watch
 
 migrate: ## artisan migrate
 	docker exec laravel-php php /web/artisan migrate
