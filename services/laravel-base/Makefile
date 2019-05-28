@@ -9,7 +9,7 @@ laravel-project: ## laravel install + application setup
 	# docker-compose -f ../docker-network.yml -f ./docker-compose.yml up -d laravel-composer
 	# docker-compose -f ../docker-network.yml -f ./docker-compose.yml run --rm laravel-composer composer create-project laravel/laravel /app v5.7.0
 	docker-compose -p ${PROJECT_NAME} up -d laravel-composer
-	docker-compose -p ${PROJECT_NAME} run --rm laravel-composer composer create-project laravel/laravel /app v5.7.0
+	docker-compose -p ${PROJECT_NAME} run --rm laravel-composer composer create-project laravel/laravel /app v5.8.17
 	make laravel-setup
 
 laravel-setup: ## application setup
