@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+  csqlt:
+    container_name: csqlt
+    hostname: csqlt
+    image: csqlt
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: ${PWD}
+    volumes:
+      - ${HOME}:${HOME}
+    tty: true

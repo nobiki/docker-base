@@ -1,0 +1,7 @@
+if [ "" != "${NET}" ]; then
+    NETWORK="--net=${NET}"
+else
+    NETWORK=""
+fi
+
+docker run -it --rm ${NETWORK} -v ${HOME}:${HOME} -w ${PWD} csqlt $@
