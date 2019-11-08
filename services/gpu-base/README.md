@@ -7,11 +7,17 @@
 ## Testing Environment
 
 * Ubuntu 18.04 LTS
-* Nvidia GPU (MSI GTX1050)
+* Nvidia GPU (GeForce GTX 1050)
+
+```
+$ lspci | grep -i nvidia
+01:00.0 VGA compatible controller: NVIDIA Corporation GP107 [GeForce GTX 1050] (rev a1)
+01:00.1 Audio device: NVIDIA Corporation GP107GL High Definition Audio Controller (rev a1)
+```
 
 ## Get stated
 
-Build `gpu-base:latest` Image
+Build `gpu-base:latest` Image (Base Image: [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda))
 
 ```
 $ make build
@@ -75,4 +81,13 @@ Using [glmark2](https://github.com/glmark2/glmark2)
 
 ```
 $ make glmark
+docker run --rm --gpus all -e DISPLAY=:0 -v /tmp/.X11-unix/:/tmp/.X11-unix gpu-base:latest glmark2
+=======================================================
+    glmark2 2014.03+git20150611.fa71af2d
+=======================================================
+    OpenGL Information
+    GL_VENDOR:     NVIDIA Corporation
+    GL_RENDERER:   GeForce GTX 1050/PCIe/SSE2
+    GL_VERSION:    4.6.0 NVIDIA 440.26
+=======================================================
 ```
