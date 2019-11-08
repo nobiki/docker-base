@@ -19,6 +19,9 @@ tty: ## bash
 tty-nogpu: ## bash without GPU
 	docker run --rm            -e DISPLAY=:0 -v /tmp/.X11-unix/:/tmp/.X11-unix -it gpu-base:latest bash
 
+display-list:
+	(cd /tmp/.X11-unix && for x in X*; do echo ":${x#X}"; done)
+
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 

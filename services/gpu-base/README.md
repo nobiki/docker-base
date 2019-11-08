@@ -33,15 +33,16 @@ $ xhost +
 access control disabled, clients can connect from any host
 ```
 
-If `xhost:  unable to open display ""` is displayed, set the` DISPLAY` environment variable
+set the` DISPLAY` environment variable
 
 ```
-// confirm display list
-$ (cd /tmp/.X11-unix && for x in X*; do echo ":${x#X}"; done)
-:0
+// confirm DISPLAY environment variable
+$ echo $DISPLAY
 
 // set DISPLAY environment variable
 $ export DISPLAY=:0
+$ echo $DISPLAY
+:0
 ```
 
 The result of `nvidia-smi` is as follows
