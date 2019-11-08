@@ -1,0 +1,7 @@
+FROM nvidia/cuda:10.1-base-ubuntu18.04
+
+# Debug Tool
+RUN apt update && apt install -y x11-apps mesa-utils glmark2
+
+ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:-all}
