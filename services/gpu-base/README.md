@@ -21,7 +21,7 @@ Allow xhost setting
 
 ```
 // Allow local only
-$ xhost local:
+$ xhost + local:
 non-network local connections being added to access control list
 
 $ xhost
