@@ -1,5 +1,12 @@
 # gpu-base
 
+## Get Started
+
+```
+$ docker login docker.pkg.github.com -u USERNAME -p TOKEN
+$ docker pull docker.pkg.github.com/nobiki/docker-base/gpu-base:latest
+```
+
 ## Requirement
 
 * docker 19.03+
