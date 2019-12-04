@@ -1,0 +1,25 @@
+name: gpu-base - Build and Push
+
+on:
+  push:
+    paths:
+      - 'services/gpu-base/*Dockerfile'
+
+jobs:
+  build-and-push:
+
+    runs-on: ubuntu-18.04
+    timeout-minutes: 300
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build Image
+      run: make build
+      working-directory: services/gpu-base
+
+    - name: Push to Github Package Registry
+      run: |
+        docker login docker.pkg.github.com -u nobiki -p ${{ secrets.GH_ACCESS_TOKEN }}
+        docker tag gpu-base docker.pkg.github.com/nobiki/docker-base/gpu-base:latest
+        docker push docker.pkg.github.com/nobiki/docker-base/gpu-base:latest
