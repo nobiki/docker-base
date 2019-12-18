@@ -1,0 +1,36 @@
+version: '2.3'
+
+services:
+
+  spa-develop:
+    image: spa-develop
+    build:
+      context: ${PWD}/.
+      target: develop
+    ports:
+      - 8080:80
+    environment:
+      - "TZ=Asia/Tokyo"
+    init: true
+    volumes_from:
+      - spa-volume
+
+  spa-release:
+    image: spa-release
+    build:
+      context: ${PWD}/.
+      target: release
+    ports:
+      - 80:80
+    environment:
+      - "TZ=Asia/Tokyo"
+    init: true
+
+  spa-volume:
+    container_name: spa-volume
+    hostname: spa-volume
+    image: busybox
+    volumes:
+      - ${PWD}/default.conf:/etc/nginx/conf.d/default.conf
+      - ${PWD}/apps:/apps
+
