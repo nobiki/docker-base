@@ -1,0 +1,52 @@
+version: '2.3'
+
+services:
+
+  schemaspy:
+    container_name: schemaspy
+    hostname: schemaspy
+    image: schemaspy:latest
+    build:
+      context: ${PWD}/
+    environment:
+      - "TZ=Asia/Tokyo"
+    volumes:
+      - ${PWD}/schemaspy.properties:/schemaspy.properties
+    volumes_from:
+      - schemaspy-contents
+    depends_on:
+      - schemaspy-db
+
+  schemaspy-web:
+    container_name: schemaspy-web
+    hostname: schemaspy-web
+    image: pagespeed/nginx-pagespeed:1.13.35.2
+    ports:
+      - 8080:80
+    volumes:
+      - ${PWD}/nginx.conf:/etc/nginx/conf.d/default.conf
+    volumes_from:
+      - schemaspy-contents
+    init: true
+
+  schemaspy-db:
+    container_name: schemaspy-db
+    hostname: schemaspy-db
+    image: mysql:5.7
+    environment:
+      - "TZ=Asia/Tokyo"
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_DATABASE=schemaspy"
+    volumes_from:
+      - schemaspy-contents
+    init: true
+
+  schemaspy-contents:
+    container_name: schemaspy-contents
+    hostname: schemaspy-contents
+    image: busybox
+    volumes:
+      - ${PWD}/db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+      - ${PWD}/db/etc/mysql/conf.d/:/etc/mysql/conf.d/
+      - ${PWD}/output:/output
+
