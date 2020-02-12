@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  golang-base:
+    container_name: golang-base
+    hostname: golang-base
+    image: golang-base
+    build:
+      context: ${PWD}/.
+      target: develop
+    env_file:
+      - ${PWD}/.env.example
+    volumes:
+      - ./apps:/apps
+    init: true
