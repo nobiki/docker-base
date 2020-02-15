@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  common: &common
+    image: hello-world
+    env_file: .env
+    working_dir: ${PWD}
+    volumes:
+      - ${PWD}:${PWD}
+
+  GoRP-node:
+    <<: *common
+    container_name: GoRP-node
+    hostname: GoRP-node
+    image: node:12.16.0-alpine
