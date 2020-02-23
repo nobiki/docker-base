@@ -7,9 +7,17 @@ services:
     working_dir: ${PWD}
     volumes:
       - ${PWD}:${PWD}
+      - ${PWD}/nginx.conf:/etc/nginx/conf.d/default.conf
 
   GoRP-node:
     <<: *common
     container_name: GoRP-node
     hostname: GoRP-node
     image: node:12.16.0-alpine
+
+  GoRP-web:
+    <<: *common
+    container_name: GoRP-web
+    hostname: GoRP-web
+    image: pagespeed/nginx-pagespeed:1.13.35.2
+
