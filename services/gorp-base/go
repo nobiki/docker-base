@@ -1,6 +1,9 @@
 #!/bin/bash -eu
 cd $(dirname `realpath $0`);source .env
 
-docker-compose build --quiet --build-arg APIDIR=${APIDIR} gorp-go
+if "${GOBUILD:-true}"; then
+    echo "Building.."
+    docker-compose build --quiet --build-arg APIDIR=${APIDIR} gorp-go
+fi
 
 docker-compose run --rm ${COMPOSE_PROJECT_NAME}-go go ${@}
