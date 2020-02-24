@@ -6,10 +6,19 @@ services:
     container_name: gorp-go
     hostname: gorp-go
     image: gorp-go
-    env_file: .env
     build:
       context: ${PWD}
       dockerfile: dockerfile/go.Dockerfile
       target: develop
+    env_file: .env
     volumes:
       - ./${APIDIR}:/${APIDIR}
+
+  gorp-node:
+    container_name: gorp-node
+    hostname: gorp-node
+    image: node:12.16.0-alpine
+    env_file: .env
+    working_dir: /${APPDIR}
+    volumes:
+      - ./${APPDIR}:/${APPDIR}
