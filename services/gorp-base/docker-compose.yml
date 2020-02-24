@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
 
-  gorp-go:
+  gorp-go: &gorp-go
     container_name: gorp-go
     hostname: gorp-go
     image: gorp-go
@@ -13,6 +13,13 @@ services:
     env_file: .env
     volumes:
       - ./${APIDIR}:/${APIDIR}
+
+  gorp-hello:
+    <<: *gorp-go
+    build:
+      context: ${PWD}
+      dockerfile: dockerfile/go.Dockerfile
+      target: release
 
   gorp-node:
     container_name: gorp-node

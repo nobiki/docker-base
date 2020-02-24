@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`);source .env
+
+docker-compose build --quiet --build-arg APIDIR=${APIDIR} gorp-hello
+
+docker-compose run --rm ${COMPOSE_PROJECT_NAME}-hello ${@}
