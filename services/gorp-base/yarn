@@ -1,8 +1,6 @@
 #!/bin/bash -eu
 cd $(dirname `realpath $0`);source .env
 
-mkdir -p ${APPDIR}
-
 docker-compose run --rm \
   -u ${OWNER} \
   ${COMPOSE_PROJECT_NAME}-node yarn ${@}
