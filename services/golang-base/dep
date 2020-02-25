@@ -1,0 +1,9 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`);source .env
+
+if "${GOLANG_BUILD:-true}"; then
+    echo "Building.."
+    docker-compose build ${COMPOSE_BUILD_OPTION} --build-arg ROOTDIR=${ROOTDIR} golang-base
+fi
+
+docker-compose run --rm -u ${OWNER} golang-base $(basename $0) ${@}
