@@ -10,8 +10,7 @@ services:
       context: ${PWD}
       dockerfile: dockerfile/go.Dockerfile
       target: develop
-    env_file:
-      - ${PWD}/.env
+    env_file: .env
     volumes:
       - ./api:/go/src
 
@@ -23,3 +22,16 @@ services:
     working_dir: /app
     volumes:
       - ./app:/app
+
+  gorp-postgres:
+    container_name: gorp-postgres
+    hostname: gorp-postgres
+    image: gorp-postgres
+    build:
+      context: ${PWD}
+      dockerfile: dockerfile/postgres.Dockerfile
+    env_file: .env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
