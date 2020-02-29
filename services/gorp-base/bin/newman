@@ -1,0 +1,5 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`)/../;source .env
+
+docker run --rm -t postman/newman:alpine ${@}
+# docker run --rm -v ${PWD}/postman/collections/:/etc/newman -t postman/newman:alpine ${@}
