@@ -8,7 +8,7 @@ OR VALUE ~ '^\d{5}-\d{4}$'
 
 create table hoge
 (
-    id serial,
+    id serial primary key,
     name varchar(255) not null default 'hello',
     postal us_postal_code
 );
