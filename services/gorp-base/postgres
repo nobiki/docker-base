@@ -6,4 +6,4 @@ if "${GOBUILD:-true}"; then
     docker-compose build ${COMPOSE_BUILD_OPTION} gorp-postgres
 fi
 
-docker-compose ${@} gorp-postgres
+docker-compose up ${@} gorp-postgres
