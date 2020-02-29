@@ -1,5 +1,5 @@
 #!/bin/bash -eu
-cd $(dirname `realpath $0`);source .env
+cd $(dirname `realpath $0`)/../;source .env
 
 if "${GOBUILD:-true}"; then
     echo "Building.."
