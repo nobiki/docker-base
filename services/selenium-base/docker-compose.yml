@@ -1,0 +1,22 @@
+version: "2.3"
+
+services:
+
+  ###################
+  ## Node
+  ###################
+  standard-chrome:
+    image: docker.pkg.github.com/nobiki/selenium-base/standard-chrome:latest
+    env_file: ./environments/standard-chrome.env
+
+  standard-chrome-debug:
+    image: docker.pkg.github.com/nobiki/selenium-base/standard-chrome-debug:latest
+    env_file: ./environments/standard-chrome-debug.env
+
+  gpu-chrome:
+    image: docker.pkg.github.com/nobiki/selenium-base/gpu-chrome:latest
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    env_file: ./environments/gpu-chrome.env
+

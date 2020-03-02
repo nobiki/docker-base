@@ -1,0 +1,5 @@
+.env
+.running_nodes
+
+/sample-test/output/*
+!/sample-test/output/.gitkeep

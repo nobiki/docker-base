@@ -1,0 +1,26 @@
+name: Build Sample Robotframework and Push to Github Package Registry
+
+on:
+  push:
+    paths:
+      - 'sample-robot/**'
+
+jobs:
+  build-and-push:
+
+    runs-on: ubuntu-18.04
+    timeout-minutes: 300
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build Sample Testing Image
+      working-directory: sample-robot
+      run: make build
+
+    - name: Push to Github Package Registry
+      run: |
+        docker login docker.pkg.github.com -u nobiki -p ${{ secrets.GH_ACCESS_TOKEN }}
+
+        docker tag selenium-robot:latest docker.pkg.github.com/nobiki/selenium-base/selenium-robot:latest
+        docker push docker.pkg.github.com/nobiki/selenium-base/selenium-robot:latest

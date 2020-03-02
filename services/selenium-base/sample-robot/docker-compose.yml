@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+
+  selenium-robot:
+    image: selenium-robot:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}/tests/:/tests
+
+  robot-report:
+    container_name: robot-report
+    hostname: robot-report
+    image: pagespeed/nginx-pagespeed:1.13.35.2
+    ports:
+      - 10080:80
+    volumes:
+      - ${PWD}/report.conf:/etc/nginx/conf.d/default.conf
+      - ${PWD}/tests/results:/report
+    environment:
+      - TZ=Asia/Tokyo
+

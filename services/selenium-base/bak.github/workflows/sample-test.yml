@@ -1,0 +1,26 @@
+name: Build Sample Testing and Push to Github Package Registry
+
+on:
+  push:
+    paths:
+      - 'sample-test/**'
+
+jobs:
+  build-and-push:
+
+    runs-on: ubuntu-18.04
+    timeout-minutes: 300
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build Sample Testing Image
+      working-directory: sample-test
+      run: make build
+
+    - name: Push to Github Package Registry
+      run: |
+        docker login docker.pkg.github.com -u nobiki -p ${{ secrets.GH_ACCESS_TOKEN }}
+
+        docker tag selenium-hello:latest docker.pkg.github.com/nobiki/selenium-base/selenium-hello:latest
+        docker push docker.pkg.github.com/nobiki/selenium-base/selenium-hello:latest

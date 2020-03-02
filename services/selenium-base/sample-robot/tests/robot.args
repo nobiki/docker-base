@@ -1,0 +1,3 @@
+--variable GRID_URL:http://selenium-hub:4444/wd/hub
+--variable BROWSER:chrome
+--outputdir results/

@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`);source ../.env
+
+if "${COMPOSE_BUILD:-true}"; then
+    echo "Building.."
+    docker-compose build ${COMPOSE_BUILD_OPTION} selenium-robot
+fi
+
+docker-compose run --rm -u ${OWNER} selenium-robot $(basename $0) ${@}
+

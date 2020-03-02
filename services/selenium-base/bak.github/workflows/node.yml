@@ -1,0 +1,33 @@
+name: Build Node and Push to Github Package Registry
+
+on:
+  push:
+    paths:
+      - 'selenium-node/dockerfile/**.Dockerfile'
+      - 'selenium-node/docker-compose.yml'
+
+jobs:
+  build-and-push:
+
+    runs-on: ubuntu-18.04
+    timeout-minutes: 300
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build Node Image
+      working-directory: selenium-node
+      run: make build
+
+    - name: Push to Github Package Registry
+      run: |
+        docker login docker.pkg.github.com -u nobiki -p ${{ secrets.GH_ACCESS_TOKEN }}
+
+        docker tag standard-chrome:latest docker.pkg.github.com/nobiki/selenium-base/standard-chrome:latest
+        docker push docker.pkg.github.com/nobiki/selenium-base/standard-chrome:latest
+
+        docker tag standard-chrome-debug:latest docker.pkg.github.com/nobiki/selenium-base/standard-chrome-debug:latest
+        docker push docker.pkg.github.com/nobiki/selenium-base/standard-chrome-debug:latest
+
+        docker tag gpu-chrome:latest docker.pkg.github.com/nobiki/selenium-base/gpu-chrome:latest
+        docker push docker.pkg.github.com/nobiki/selenium-base/gpu-chrome:latest

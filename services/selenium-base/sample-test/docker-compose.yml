@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+
+  selenium-hello:
+    image: selenium-hello:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: ../environments/standard-chrome.env
+    volumes:
+      - ${PWD}/output:/output
+

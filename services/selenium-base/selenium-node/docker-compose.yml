@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+
+  standard-chrome:
+    image: standard-chrome:latest
+    build:
+      context: ./dockerfile/
+      dockerfile: standard-chrome.Dockerfile
+    env_file: ../environments/standard-chrome.env
+
+  standard-chrome-debug:
+    image: standard-chrome-debug:latest
+    build:
+      context: ./dockerfile/
+      dockerfile: standard-chrome-debug.Dockerfile
+    env_file: ../environments/standard-chrome-debug.env
+
+  gpu-chrome:
+    image: gpu-chrome:latest
+    build:
+      context: ./dockerfile/
+      dockerfile: gpu-chrome.Dockerfile
+    env_file: ../environments/gpu-chrome.env
