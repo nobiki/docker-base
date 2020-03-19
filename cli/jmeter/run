@@ -1,0 +1,20 @@
+cd $(dirname `realpath $0`);
+
+TS=$(date +%Y%m%d%H%M%S)
+mkdir -p report/${TS}
+
+echo "HTML Report: report/${TS}"
+echo "Testcase: ${1}.jmx"
+echo "Command: jmeter -n -t ${1}.jmx -l report/${TS}/${1}.jtl -e -o report/${TS}/htdocs"
+
+read -p "Press y to execute [y/n]" str
+case "$str" in
+  [Yy])
+    docker-compose build jmeter
+    docker-compose run --rm jmeter jmeter -h
+    # docker-compose run --rm jmeter jmeter -n -t ${1}.jmx -l report/${TS}/${1}.jtl -e -o report/${TS}/htdocs
+    ;;
+  *)
+    echo "skip"
+    ;;
+esac
