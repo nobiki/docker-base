@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`)/../;source .env
+
+docker-compose run --rm -d \
+  -u ${OWNER} \
+  ${COMPOSE_PROJECT_NAME}-node node_modules/node-red/red.js ${@}

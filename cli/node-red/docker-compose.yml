@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  nodered-node:
+    container_name: nodered-node
+    hostname: nodered-node
+    image: nodered-node
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    working_dir: /app
+    volumes:
+      - ./app:/app
