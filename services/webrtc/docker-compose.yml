@@ -7,6 +7,8 @@ services:
     hostname: webrtc-node
     image: node:12.16.0-alpine
     working_dir: /app
+    ports:
+      - 3002:3002
     volumes:
       - ./app:/app
 
@@ -15,6 +17,21 @@ services:
     hostname: webrtc-web
     image: nginx:alpine
     working_dir: /web
+    ports:
+      - 10080:80
     volumes:
       - ./web:/web
       - ./default.conf:/etc/nginx/conf.d/default.conf
+
+  # https-portal:
+  #   image: steveltn/https-portal:1
+  #   ports:
+  #     - '10080:80'
+  #     - '443:443'
+  #   links:
+  #     - wordpress
+  #   restart: always
+  #   environment:
+  #     DOMAINS: 'wordpress.example.com -> http://wordpress:80'
+  #     # STAGE: 'production' # Don't use production until staging works
+  #     # FORCE_RENEW: 'true'

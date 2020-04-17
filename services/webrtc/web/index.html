@@ -3,7 +3,7 @@
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>multi party</title>
- <script src="http://172.28.0.3:3002/socket.io/socket.io.js"></script>
+ <script src="http://192.168.2.204:3002/socket.io/socket.io.js"></script>
  <script>
    function _assert(desc, v) {
      if (v) {
@@ -66,7 +66,7 @@
   /*---
   // -------- websocket ----
   // please use node.js app
-  //  
+  //
   // or you can use chrome app (only work with Chrome)
   //  https://chrome.google.com/webstore/detail/simple-message-server/bihajhgkmpfnmbmdnobjcdhagncbkmmp
   //
@@ -107,7 +107,7 @@
 
   // ----- use socket.io ---
   let port = 3002;
-  let socket = io.connect('http://172.28.0.3:' + port + '/');
+  let socket = io.connect('http://192.168.2.204:' + port + '/');
   let room = getRoomName();
   socket.on('connect', function(evt) {
     console.log('socket.io connected. enter room=' + room );
@@ -348,6 +348,7 @@
   }
   
   function getDeviceStream(option) {
+    console.log(navigator.mediaDevices);
     if ('getUserMedia' in navigator.mediaDevices) {
       console.log('navigator.mediaDevices.getUserMadia');
       return navigator.mediaDevices.getUserMedia(option);
