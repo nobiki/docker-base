@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  webrtc-node:
+    container_name: webrtc-node
+    hostname: webrtc-node
+    image: node:12.16.0-alpine
+    working_dir: /app
+    volumes:
+      - ./app:/app
+
+  webrtc-web:
+    container_name: webrtc-web
+    hostname: webrtc-web
+    image: nginx:alpine
+    working_dir: /web
+    volumes:
+      - ./web:/web
+      - ./default.conf:/etc/nginx/conf.d/default.conf

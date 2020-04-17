@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`)/../;source .env
+
+docker-compose run -d \
+  -u ${OWNER} \
+  ${COMPOSE_PROJECT_NAME}-node signaling_server
