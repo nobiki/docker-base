@@ -2,16 +2,21 @@ version: '3.7'
 
 services:
 
+  # Socket
   webrtc-node:
     container_name: webrtc-node
     hostname: webrtc-node
     image: node:12.16.0-alpine
     working_dir: /app
-    ports:
-      - 3002:3002
+    # ports:
+    #   - 3002:3002
     volumes:
       - ./app:/app
+    command: ["signaling_server"]
+    depends_on:
+      - webrtc-dnsmasq
 
+  # Web
   webrtc-web:
     container_name: webrtc-web
     hostname: webrtc-web
@@ -20,19 +25,37 @@ services:
     # ports:
     #   - 10080:80
     volumes:
-      - ./web:/web
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./web:/usr/share/nginx/html
+    depends_on:
+      - webrtc-dnsmasq
 
-  https-portal:
+  # SSL Reverse Proxy
+  webrtc-portal:
     image: steveltn/https-portal:1
+    container_name: webrtc-portal
     ports:
       - 80:80
       - 443:443
     restart: always
     environment:
-      DOMAINS: 'webrtc.local -> http://webrtc-web:80'
+      DOMAINS: 'webrtc.local -> http://webrtc-web:80, socket.webrtc.local -> http://webrtc-node:80'
+      WEBSOCKET: "true"
       STAGE: local
     volumes:
-      - ./org-chimata-ssl-certs:/var/lib/https-portal
+      - ./ssl-certs:/var/lib/https-portal
     depends_on:
       - webrtc-web
+      - webrtc-node
+
+  # Local DNS Server
+  webrtc-dnsmasq:
+    image: andyshinn/dnsmasq
+    container_name: webrtc-dnsmasq
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    extra_hosts:
+      - "webrtc.local:192.168.2.204"
+      - "socket.webrtc.local:192.168.2.204"
+    cap_add:
+      - NET_ADMIN

@@ -3,7 +3,7 @@
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>multi party</title>
- <script src="http://192.168.2.204:3002/socket.io/socket.io.js"></script>
+ <script src="https://socket.webrtc.local/socket.io/socket.io.js"></script>
  <script>
    function _assert(desc, v) {
      if (v) {
@@ -106,8 +106,7 @@
   --*/
 
   // ----- use socket.io ---
-  let port = 3002;
-  let socket = io.connect('http://192.168.2.204:' + port + '/');
+  let socket = io.connect('https://socket.webrtc.local/');
   let room = getRoomName();
   socket.on('connect', function(evt) {
     console.log('socket.io connected. enter room=' + room );
