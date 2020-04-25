@@ -15,15 +15,14 @@
      }
    }
   </script>
+
+  <!-- smartmenu -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="smartmenu.min.css" />
 </head>
 <body>
-  socket.io signaling for multi-party (trickle ICE)<br />
-  <button type="button" onclick="startVideo();">Start Video</button>
-  <button type="button" onclick="stopVideo();">Stop Video</button>
-  &nbsp;
-  <button type="button" onclick="connect();">Connect</button>
-  <button type="button" onclick="hangUp();">Hang Up</button> 
-  <div>
+  <div align="center">
     <video id="local_video" autoplay style="width: 160px; height: 120px; border: 1px solid black;"></video>
   </div>
   <div id="container">
@@ -38,6 +37,24 @@
     <textarea id="text_for_receive_sdp" rows="5" cols="60"></textarea>
   </p>
   -->
+  <div id="smartmenu">
+    <table>
+    <tr>
+      <td>
+        <a href="#" onclick="startVideo();"><i class="fas fa-play"></i><br>Start Video</a>
+      </td>
+      <td>
+        <a href="#" onclick="stopVideo();"><i class="fas fa-stop"></i><br>Stop Video</a>
+      </td>
+      <td>
+        <a href="#" onclick="connect();"><i class="fas fa-sign-in-alt"></i><br>Connect</a>
+      </td>
+      <td>
+        <a href="#" onclick="hangUp();"><i class="fas fa-sign-out-alt"></i><br>Hang Up</a>
+      </td>
+    </tr>
+    </table>
+  </div>
 </body>
 <script type="text/javascript">
   let localVideo = document.getElementById('local_video');
