@@ -4,8 +4,6 @@ services:
 
   # Socket
   webrtc-node:
-    container_name: webrtc-node
-    hostname: webrtc-node
     image: node:12.16.0-alpine
     working_dir: /app
     # ports:
@@ -13,21 +11,15 @@ services:
     volumes:
       - ./app:/app
     command: ["signaling_server"]
-    depends_on:
-      - webrtc-dnsmasq
 
   # Web
   webrtc-web:
-    container_name: webrtc-web
-    hostname: webrtc-web
     image: nginx:alpine
     working_dir: /web
     # ports:
     #   - 10080:80
     volumes:
       - ./web:/usr/share/nginx/html
-    depends_on:
-      - webrtc-dnsmasq
 
   # SSL Reverse Proxy
   webrtc-portal:
