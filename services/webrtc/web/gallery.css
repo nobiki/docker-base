@@ -1,7 +1,7 @@
 .gallery {
   float: left;
   position: relative;
-  height: 100px;
+  height: 200px;
   margin: 20px 20px;
   border: 2px solid #fff;
   background: #fff;
@@ -10,9 +10,8 @@
   box-sizing: border-box;
 }
 
-/*
 .gallery:hover {
   z-index: 10;
+  transform-origin:left top;
   transform: scale(3.0) rotate(0deg);
 }
-*/
