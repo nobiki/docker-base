@@ -26,7 +26,7 @@
 </head>
 <body>
   <div>
-    <video id="local_video" class="gallery" autoplay></video>
+    <video id="local_video" class="gallery" autoplay controls></video>
   </div>
   <div id="container">
   </div>
@@ -297,6 +297,7 @@
     _assert('addRemoteVideoElement() video must NOT EXIST', (! remoteVideos[id]));
     let video = createVideoElement('remote_video_' + id);
     video.className = "gallery";
+    video.controls = true;
     remoteVideos[id] = video;
     return video;
   }
