@@ -1,0 +1,9 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`)/../;source .env
+
+docker run --rm \
+  -u ${OWNER} \
+  -v ${PWD}/src:/src \
+  -w /src \
+  --env-file .env \
+  ${NODE_IMAGE} npm "${@}"

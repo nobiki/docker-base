@@ -1,0 +1,4 @@
+#!/bin/bash -eu
+cd $(dirname `realpath $0`)/../;source .env
+
+docker-compose "${@}" api

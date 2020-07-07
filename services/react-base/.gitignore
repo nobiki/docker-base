@@ -1,0 +1,7 @@
+.env
+node_modules/
+
+go/*
+!go/.gitkeep
+
+https-portal/ssl-certs/

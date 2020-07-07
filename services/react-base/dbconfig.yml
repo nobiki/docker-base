@@ -1,0 +1,5 @@
+development:
+  dialect: postgres
+  datasource: host=172.29.0.3 user=user password=pass dbname=dbname sslmode=disable
+  dir: postgres/migrations
+  table: migrations
