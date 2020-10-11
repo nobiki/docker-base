@@ -1,0 +1,19 @@
+version: "3.6"
+
+services:
+
+  flask-base:
+    container_name: flask-base
+    hostname: flask-base
+    image: flask-base:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    env_file: .env
+    tty: true
+    ports:
+      - "5000:5000"
+    # volumes:
+    #   - ${PWD}/myapp:/myapp
+
