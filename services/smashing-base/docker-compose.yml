@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  smashing-dashboard:
+    image: smashing-dashboard
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file: .env
+    user: "${UID}:${GID}"
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./dashboard:/app/dashboard
+
