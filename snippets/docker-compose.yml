@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  mysql:
+    image: mysql
+    build:
+      context: ./
+      dockerfile: ./docker/mysql/Dockerfile
+    # ports:
+    #   - "13306:3306"
+    env_file: ./docker/mysql/.env
+    environment:
+      - "MYSQL_DATABASE=hogehoge"
+    volumes:
+      - db-store:/var/lib/mysql
+      - ${PWD}/docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ${PWD}/docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    tty: true
+
+# volumes:
+#   db-store:
