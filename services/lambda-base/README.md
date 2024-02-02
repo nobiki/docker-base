@@ -27,6 +27,6 @@ docker compose up -d
 ```
 
 ```
-curl http://127.0.0.1:9000/2015-03-31/functions/function/invocations -s -d '{"hoge":"moge"}'
+curl http://127.0.0.1:9000/2015-03-31/functions/function/invocations -s -d '{"hoge":"moge"}' | jq .
 ```
 
