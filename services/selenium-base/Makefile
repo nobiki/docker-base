@@ -9,19 +9,19 @@ export $(shell sed 's/=.*//' .env)
 ###################
 ## Network
 ###################
-network: ## [Up] Selenium Hub -> 127.0.0.1:4444
+network: ## [Up] Selenium Network - ${COMPOSE_PROJECT_NAME}-net
 	make -C selenium-network network
 
-network-cleanup: ## [Down] Selenium Hub
+network-cleanup: ## [Down] Selenium Network
 	make -C selenium-network network-cleanup
 
 ###################
 ## Hub
 ###################
-hub: ## [Up] Selenium Hub -> 127.0.0.1:4444
+hub: ## [Up] Selenium Grid Hub - localhost:4444
 	make -C selenium-hub hub
 
-hub-cleanup: ## [Down] Selenium Hub
+hub-cleanup: ## [Down] Selenium Grid Hub
 	make -C selenium-hub hub-cleanup
 
 ###################
