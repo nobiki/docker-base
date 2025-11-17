@@ -28,16 +28,14 @@ hub-cleanup: ## [Down] Selenium Hub
 ## Node
 ###################
 standard-chrome: ## [Up] Standard Node
-	docker compose run --rm -d standard-chrome 1>>.running_nodes
-	@cat .running_nodes
-
-gpu-chrome: ## [Up] GPU Node
-	docker run -d --rm --net ${COMPOSE_PROJECT_NAME}_default --gpus all --env-file environments/gpu-chrome.env -e DISPLAY=:0 -v /tmp/.X11-unix/:/tmp/.X11-unix:rw --name gpu-chrome docker.pkg.github.com/nobiki/selenium-base/gpu-chrome:latest | xargs -ICID echo gpu-chrome-CID | tee -a .running_nodes | xargs -IRENAME docker rename gpu-chrome RENAME
-	@cat .running_nodes
+	make -C selenium-node standard-chrome
 
 node-cleanup: ## [Down] All Node
 	-cat .running_nodes | awk '/^${COMPOSE_PROJECT_NAME}/' | xargs docker rm -f
 	echo '' > .running_nodes
+
+node-build: ## [Build] All Node
+	make -C selenium-node build
 
 ###################
 ## Testing
