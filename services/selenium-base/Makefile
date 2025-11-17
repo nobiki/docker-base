@@ -57,6 +57,6 @@ standard-robot:
 	make node-cleanup
 
 iplist: ## show container ip
-	@docker network inspect ${COMPOSE_PROJECT_NAME}_default | jq -r '.[0].Containers[] | [.Name, "-->", .IPv4Address] | @csv' | column -t -s "," | xargs -ICONTAINER echo "- CONTAINER"
+	@docker network inspect ${COMPOSE_PROJECT_NAME}-net | jq -r '.[0].Containers[] | [.Name, "-->", .IPv4Address] | @csv'
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sed -e 's/Makefile://g' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

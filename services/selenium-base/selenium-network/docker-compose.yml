@@ -1,7 +1,7 @@
 networks:
-  selenium-base-net:
+  selenium-net:
     driver: bridge
-    name: selenium-base-net
+    name: ${COMPOSE_PROJECT_NAME}-net
 
 services:
   fake:
@@ -11,4 +11,4 @@ services:
         FROM scratch
     command: fake
     networks:
-      selenium-base-net:
+      selenium-net:
