@@ -1,11 +1,9 @@
-version: "3"
-
 services:
 
   selenium-hub:
     container_name: selenium-hub
     hostname: selenium-hub
-    image: selenium/hub:3.141.59
+    image: selenium/hub:latest
     environment:
       - TZ=Asia/Tokyo
       - GRID_BROWSER_TIMEOUT=30

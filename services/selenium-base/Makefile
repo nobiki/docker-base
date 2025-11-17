@@ -28,7 +28,7 @@ hub-cleanup: ## [Down] Selenium Hub
 ## Node
 ###################
 standard-chrome: ## [Up] Standard Node
-	docker-compose run --rm -d standard-chrome 1>>.running_nodes
+	docker compose run --rm -d standard-chrome 1>>.running_nodes
 	@cat .running_nodes
 
 gpu-chrome: ## [Up] GPU Node
