@@ -1,8 +1,8 @@
 networks:
-  selenium-base-net:
+  selenium-net:
     driver: bridge
-    name: selenium-base-net
-    external: true
+    name: ${COMPOSE_PROJECT_NAME}-net
+
 
 services:
 
@@ -13,7 +13,7 @@ services:
       dockerfile: node-chrome.Dockerfile
     env_file: ../environments/node.env
     networks:
-      selenium-base-net:
+      selenium-net:
         aliases:
           - node-chrome
 
@@ -24,7 +24,7 @@ services:
       dockerfile: node-firefox.Dockerfile
     env_file: ../environments/node.env
     networks:
-      selenium-base-net:
+      selenium-net:
         aliases:
           - node-firefox
 

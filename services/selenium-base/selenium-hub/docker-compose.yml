@@ -1,7 +1,7 @@
 networks:
-  selenium-base-net:
+  selenium-net:
     driver: bridge
-    name: selenium-base-net
+    name: ${COMPOSE_PROJECT_NAME}-net
     external: true
 
 services:
@@ -17,6 +17,6 @@ services:
     ports:
       - 4442-4444:4442-4444
     networks:
-      selenium-base-net:
+      selenium-net:
         aliases:
           - selenium-hub
