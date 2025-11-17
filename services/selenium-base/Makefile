@@ -7,6 +7,15 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 ###################
+## Network
+###################
+network: ## [Up] Selenium Hub -> 127.0.0.1:4444
+	make -C selenium-network network
+
+network-cleanup: ## [Down] Selenium Hub
+	make -C selenium-network network-cleanup
+
+###################
 ## Hub
 ###################
 hub: ## [Up] Selenium Hub -> 127.0.0.1:4444
@@ -20,10 +29,6 @@ hub-cleanup: ## [Down] Selenium Hub
 ###################
 standard-chrome: ## [Up] Standard Node
 	docker-compose run --rm -d standard-chrome 1>>.running_nodes
-	@cat .running_nodes
-
-standard-chrome-debug: ## [Up] Standard Node(Debug)
-	docker-compose run --rm -d standard-chrome-debug 1>>.running_nodes
 	@cat .running_nodes
 
 gpu-chrome: ## [Up] GPU Node

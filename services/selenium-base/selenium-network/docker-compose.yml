@@ -1,0 +1,14 @@
+networks:
+  selenium-base-net:
+    driver: bridge
+    name: selenium-base-net
+
+services:
+  fake:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM scratch
+    command: fake
+    networks:
+      selenium-base-net:
