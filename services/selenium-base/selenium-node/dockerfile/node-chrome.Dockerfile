@@ -1,4 +1,4 @@
-FROM selenium/standalone-chrome:latest
+FROM selenium/node-chrome:latest
 
 RUN sudo apt update \
  && sudo apt install -y locales tzdata language-pack-ja-base language-pack-ja fonts-noto-cjk \

@@ -1,17 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
 .DEFAULT_GOAL := help
 .PHONY: help
 
-$(eval PROJECT_NAME=$(shell cat ../.project))
-export COMPOSE_PROJECT_NAME=${PROJECT_NAME}
 export SCALE=1 # Range: [1-9]
 
 build: ## [Build] Node Image Build
-	docker compose build standard-chrome
+	docker compose build node-chrome
 
-standard-chrome: ## [Up] Standard Node
-	docker compose run --rm -d standard-chrome 1>>../.running_nodes
+node-chrome: ## [Up] Standard Node
+	docker compose run --rm -d node-chrome | grep -Eo '^[0-9a-f]{64}$$' >> ../.running_nodes
 	@cat ../.running_nodes
 
 help:

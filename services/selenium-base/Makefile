@@ -27,8 +27,8 @@ hub-cleanup: ## [Down] Selenium Hub
 ###################
 ## Node
 ###################
-standard-chrome: ## [Up] Standard Node
-	make -C selenium-node standard-chrome
+node-chrome: ## [Up] Standard Node
+	make -C selenium-node node-chrome
 
 node-cleanup: ## [Down] All Node
 	-cat .running_nodes | xargs docker rm -f
@@ -40,10 +40,8 @@ node-build: ## [Build] All Node
 ###################
 ## Testing
 ###################
-standard-test: ## [Up] Standard Testing
-	make standard-chrome
-	# make standard-chrome-debug
-	# make gpu-chrome
+test: ## [Up] Standard Testing
+	make node-chrome
 	sleep 10
 	-./sample-test/hello
 	make node-cleanup

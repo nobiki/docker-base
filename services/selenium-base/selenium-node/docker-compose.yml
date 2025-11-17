@@ -6,14 +6,14 @@ networks:
 
 services:
 
-  standard-chrome:
-    image: standard-chrome:latest
+  node-chrome:
+    image: node-chrome:latest
     build:
       context: ./dockerfile/
-      dockerfile: standard-chrome.Dockerfile
-    env_file: ../environments/standard-chrome.env
+      dockerfile: node-chrome.Dockerfile
+    env_file: ../environments/node-chrome.env
     networks:
       selenium-base-net:
         aliases:
-          - standard-chrome
+          - node-chrome
 
