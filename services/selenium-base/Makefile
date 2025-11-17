@@ -31,7 +31,7 @@ standard-chrome: ## [Up] Standard Node
 	make -C selenium-node standard-chrome
 
 node-cleanup: ## [Down] All Node
-	-cat .running_nodes | awk '/^${COMPOSE_PROJECT_NAME}/' | xargs docker rm -f
+	-cat .running_nodes | xargs docker rm -f
 	echo '' > .running_nodes
 
 node-build: ## [Build] All Node
