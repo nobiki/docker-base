@@ -27,11 +27,18 @@ hub-cleanup: ## [Down] Selenium Hub
 ###################
 ## Node
 ###################
-node-chrome: ## [Up] Standard Node
+node-chrome: ## [Up] Node Chrome Browser
 	make -C selenium-node node-chrome
 
+node-firefox: ## [Up] Node Firefox Browser
+	make -C selenium-node node-firefox
+
+node-allbrowsers: ## [Up] All Node Browsers
+	make -C selenium-node node-chrome
+	make -C selenium-node node-firefox
+
 node-cleanup: ## [Down] All Node
-	-cat .running_nodes | xargs docker rm -f
+	cat .running_nodes | xargs docker rm -f
 	echo '' > .running_nodes
 
 node-build: ## [Build] All Node

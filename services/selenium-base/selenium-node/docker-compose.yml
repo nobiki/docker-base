@@ -11,9 +11,20 @@ services:
     build:
       context: ./dockerfile/
       dockerfile: node-chrome.Dockerfile
-    env_file: ../environments/node-chrome.env
+    env_file: ../environments/node.env
     networks:
       selenium-base-net:
         aliases:
           - node-chrome
+
+  node-firefox:
+    image: node-firefox:latest
+    build:
+      context: ./dockerfile/
+      dockerfile: node-firefox.Dockerfile
+    env_file: ../environments/node.env
+    networks:
+      selenium-base-net:
+        aliases:
+          - node-firefox
 
